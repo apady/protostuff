@@ -81,7 +81,7 @@ Now it is possible to specify proto-compiler options directly in `pom.xml`
 
 ```xml
 <plugin>
-        <groupId>io.protostuff</groupId>
+        <groupId>io.apady</groupId>
         <artifactId>protostuff-maven-plugin</artifactId>
         <version>${protostuff.version}</version>
         <configuration>

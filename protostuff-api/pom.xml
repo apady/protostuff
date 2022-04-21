@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>protostuff</artifactId>
-    <groupId>io.protostuff</groupId>
+    <groupId>io.apady</groupId>
     <version>1.7.4</version>
   </parent>
 

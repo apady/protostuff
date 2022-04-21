@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>protostuff</artifactId>
-    <groupId>io.protostuff</groupId>
+    <groupId>io.apady</groupId>
     <version>1.7.4</version>
   </parent>
 
@@ -17,32 +17,32 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.protostuff</groupId>
+      <groupId>io.apady</groupId>
       <artifactId>protostuff-core</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.protostuff</groupId>
+      <groupId>io.apady</groupId>
       <artifactId>protostuff-core</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
       <classifier>tests</classifier>
     </dependency>
     <dependency>
-      <groupId>io.protostuff</groupId>
+      <groupId>io.apady</groupId>
       <artifactId>protostuff-runtime</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
       <classifier>tests</classifier>
     </dependency>
     <dependency>
-      <groupId>io.protostuff</groupId>
+      <groupId>io.apady</groupId>
       <artifactId>protostuff-collectionschema</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>io.protostuff</groupId>
+      <groupId>io.apady</groupId>
       <artifactId>protostuff-runtime</artifactId>
       <version>${project.version}</version>
     </dependency>

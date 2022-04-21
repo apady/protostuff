@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <artifactId>protostuff</artifactId>
-    <groupId>io.protostuff</groupId>
+    <groupId>io.apady</groupId>
     <version>1.7.4</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -12,25 +12,25 @@
 
   <dependencies>
     <dependency>
-      <groupId>io.protostuff</groupId>
+      <groupId>io.apady</groupId>
       <artifactId>protostuff-api</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>io.protostuff</groupId>
+      <groupId>io.apady</groupId>
       <artifactId>protostuff-runtime</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>io.protostuff</groupId>
+      <groupId>io.apady</groupId>
       <artifactId>protostuff-core</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>io.protostuff</groupId>
+      <groupId>io.apady</groupId>
       <artifactId>protostuff-json</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
@@ -83,7 +83,7 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>io.protostuff</groupId>
+        <groupId>io.apady</groupId>
         <artifactId>protostuff-maven-plugin</artifactId>
         <version>${project.version}</version>
         <configuration>

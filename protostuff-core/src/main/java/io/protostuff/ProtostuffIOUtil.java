@@ -14,11 +14,14 @@
 
 package io.protostuff;
 
+import io.netty.buffer.ByteBuf;
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -111,6 +114,13 @@ public final class ProtostuffIOUtil
             Schema<T> schema)
     {
         IOUtil.mergeFrom(data, offset, length, message, schema, true);
+    }
+
+    /**
+     * Merges the {@code message} with the ByteBuffer using the given {@code schema}.
+     */
+    public static <T> void mergeFrom(ByteBuffer byteBuffer, T message, Schema<T> schema) throws IOException {
+        IOUtil.mergeFrom(byteBuffer, message, schema, true);
     }
 
     /**
@@ -233,6 +243,22 @@ public final class ProtostuffIOUtil
         schema.writeTo(output, message);
         LinkedBuffer.writeTo(out, buffer);
         return output.size;
+    }
+
+    /**
+     * Serializes the {@code message} into an {@link ByteBuf} using the given schema.
+     *
+     * @return the size of the message
+     */
+    public static <T> int writeTo(ByteBuf byteBuf, T message, Schema<T> schema,
+                                  LinkedBuffer buffer) throws IOException
+    {
+        if (buffer.start != buffer.offset)
+            throw new IllegalArgumentException("Buffer previously used and had not been reset.");
+
+        final ProtobufOutput output = new ProtobufOutput(buffer);
+        schema.writeTo(output, message);
+        return LinkedBuffer.writeTo(byteBuf, buffer);
     }
 
     /**

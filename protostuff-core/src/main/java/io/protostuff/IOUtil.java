@@ -18,6 +18,7 @@ import java.io.DataInput;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.ByteBuffer;
 
 /**
  * Common io utils for the supported formats.
@@ -54,6 +55,17 @@ final class IOUtil
             throw new RuntimeException("Reading from a byte array threw an IOException (should " +
                     "never happen).", e);
         }
+    }
+
+    /**
+     * Merges the {@code message} from the {@link ByteBuffer} with the supplied {@code buf} to use.
+     */
+    static <T> void mergeFrom(ByteBuffer byteBuffer, T message, Schema<T> schema,
+                              boolean decodeNestedMessageAsGroup) throws IOException
+    {
+        final ByteBufferInput input = new ByteBufferInput(byteBuffer, decodeNestedMessageAsGroup);
+        schema.mergeFrom(input, message);
+        input.checkLastTagWas(0);
     }
 
     /**
