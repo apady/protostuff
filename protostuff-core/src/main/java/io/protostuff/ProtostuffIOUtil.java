@@ -25,6 +25,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Protostuff ser/deser util for messages/objects.
@@ -215,6 +216,30 @@ public final class ProtostuffIOUtil
             throw new IllegalArgumentException("Buffer previously used and had not been reset.");
 
         final ProtostuffOutput output = new ProtostuffOutput(buffer);
+        try
+        {
+            schema.writeTo(output, message);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException("Serializing to a LinkedBuffer threw an IOException " +
+                    "(should never happen).", e);
+        }
+
+        return output.getSize();
+    }
+
+    /**
+     * Writes the {@code message} into the {@link LinkedBuffer} using the given schema.
+     *
+     * @return the size of the message
+     */
+    public static <T> int writeTo(LinkedBuffer buffer, T message, Schema<T> schema, Set<Class<?>> typeSet)
+    {
+        if (buffer.start != buffer.offset)
+            throw new IllegalArgumentException("Buffer previously used and had not been reset.");
+
+        final ProtostuffOutput output = new ProtostuffOutput(buffer, typeSet);
         try
         {
             schema.writeTo(output, message);

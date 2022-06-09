@@ -27,6 +27,7 @@ import static io.protostuff.WireFormat.makeTag;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
+import java.util.Set;
 
 /**
  * Dual output for streaming or full buffering.
@@ -36,6 +37,7 @@ import java.nio.ByteBuffer;
  */
 public final class ProtostuffOutput extends WriteSession implements Output
 {
+    private Set<Class<?>> objTypeSet;
 
     public ProtostuffOutput(LinkedBuffer buffer)
     {
@@ -51,6 +53,18 @@ public final class ProtostuffOutput extends WriteSession implements Output
             FlushHandler flushHandler, int nextBufferSize)
     {
         super(buffer, out, flushHandler, nextBufferSize);
+    }
+
+    public ProtostuffOutput(LinkedBuffer buffer, Set<Class<?>> typeSet)
+    {
+        super(buffer);
+        objTypeSet = typeSet;
+    }
+
+    public ProtostuffOutput(LinkedBuffer buffer, OutputStream out, Set<Class<?>> typeSet)
+    {
+        super(buffer, out);
+        objTypeSet = typeSet;
     }
 
     /**
@@ -359,7 +373,9 @@ public final class ProtostuffOutput extends WriteSession implements Output
                 makeTag(fieldNumber, WIRETYPE_START_GROUP),
                 this,
                 tail);
-
+        if(objTypeSet != null){
+            objTypeSet.add(value.getClass());
+        }
         schema.writeTo(this, value);
 
         tail = sink.writeVarInt32(
